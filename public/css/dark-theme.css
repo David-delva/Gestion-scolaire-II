@@ -1,0 +1,155 @@
+/*
+ * Fichier : public/css/dark-theme.css
+ * Description : Thème sombre moderne pour l'application GES
+ * Version : 1.0
+ * Date : 2025
+ */
+
+/* Palette de couleurs du thème sombre */
+:root {
+    --dark-bg-primary: #1a1f2e;
+    --dark-bg-secondary: #0f1419;
+    --dark-bg-tertiary: #252d3d;
+    --dark-text-primary: #e2e8f0;
+    --dark-text-secondary: #94a3b8;
+    --dark-border: #2d3748;
+    --dark-shadow: 0 4px 6px -1px rgba(0,0,0,0.5);
+    --dark-shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.6);
+}
+
+/* Fond général */
+body {
+    background: var(--dark-bg-secondary) !important;
+    color: var(--dark-text-primary) !important;
+}
+
+/* Navbar */
+.navbar {
+    background: var(--dark-bg-primary) !important;
+    border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.navbar-brand {
+    color: var(--dark-text-primary) !important;
+}
+
+.nav-link {
+    color: var(--dark-text-primary) !important;
+}
+
+.nav-link:hover {
+    background: var(--dark-bg-tertiary) !important;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    background: var(--dark-bg-primary) !important;
+    border: 1px solid var(--dark-border) !important;
+}
+
+.dropdown-item {
+    color: var(--dark-text-primary) !important;
+}
+
+.dropdown-item:hover {
+    background: var(--dark-bg-tertiary) !important;
+}
+
+/* Cards */
+.card {
+    background: var(--dark-bg-primary) !important;
+    border: 1px solid var(--dark-border) !important;
+    color: var(--dark-text-primary) !important;
+}
+
+.card-body {
+    background: var(--dark-bg-primary) !important;
+    color: var(--dark-text-primary) !important;
+}
+
+/* Forms */
+.form-control, .form-select {
+    background: var(--dark-bg-tertiary) !important;
+    border: 2px solid var(--dark-border) !important;
+    color: var(--dark-text-primary) !important;
+}
+
+.form-control:focus, .form-select:focus {
+    background: var(--dark-bg-tertiary) !important;
+    color: var(--dark-text-primary) !important;
+}
+
+.form-control::placeholder {
+    color: var(--dark-text-secondary) !important;
+}
+
+.form-label {
+    color: var(--dark-text-primary) !important;
+}
+
+/* Tables */
+.table {
+    background: var(--dark-bg-primary) !important;
+    color: var(--dark-text-primary) !important;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.table tbody tr:hover {
+    background: var(--dark-bg-tertiary) !important;
+}
+
+.table tbody td {
+    color: var(--dark-text-primary) !important;
+    background: var(--dark-bg-primary) !important;
+}
+
+.table tbody td span,
+.table tbody td .fw-bold {
+    color: var(--dark-text-primary) !important;
+}
+
+/* Footer */
+.footer {
+    background: var(--dark-bg-primary) !important;
+    border-top: 1px solid var(--dark-border) !important;
+    color: var(--dark-text-primary) !important;
+}
+
+/* Textes */
+h1, h2, h3, h4, h5, h6, p, span, div, label, a {
+    color: var(--dark-text-primary) !important;
+}
+
+.text-muted {
+    color: var(--dark-text-secondary) !important;
+}
+
+/* Modal */
+.modal-content {
+    background: var(--dark-bg-primary) !important;
+    border: 1px solid var(--dark-border) !important;
+}
+
+.modal-body {
+    color: var(--dark-text-primary) !important;
+}
+
+.modal-footer {
+    background: var(--dark-bg-primary) !important;
+    border-top-color: var(--dark-border) !important;
+}
+
+/* List group */
+.list-group-item {
+    background: var(--dark-bg-primary) !important;
+    color: var(--dark-text-primary) !important;
+    border-color: var(--dark-border) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar-track {
+    background: var(--dark-bg-secondary) !important;
+}
