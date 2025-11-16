@@ -13,5 +13,8 @@ RUN docker-php-ext-install pdo pdo_mysql
 # Copier le code de l'application dans le répertoire web du conteneur
 COPY . /var/www/html/
 
+# Créer le fichier de log et donner les permissions à Apache
+RUN touch /var/www/html/app.log && chown www-data:www-data /var/www/html/app.log
+
 # Exposer le port 80
 EXPOSE 80
