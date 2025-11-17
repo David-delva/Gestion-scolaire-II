@@ -77,8 +77,8 @@ class AdminController extends BaseController
                 $this->redirect('admin/users');
             }
 
-            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
             $roleId = filter_input(INPUT_POST, 'role_id', FILTER_VALIDATE_INT);
@@ -96,17 +96,17 @@ class AdminController extends BaseController
                 if ($userId) {
                     // Si c'est un enseignant (role_id = 2), créer l'entrée dans teachers
                     if ($roleId == 2) {
-                        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
-                        $hireDate = filter_input(INPUT_POST, 'hire_date', FILTER_SANITIZE_STRING) ?: date('Y-m-d');
+                        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                        $hireDate = filter_input(INPUT_POST, 'hire_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: date('Y-m-d');
                         $this->teacherModel->createTeacherFromUser($userId, $phone, $hireDate);
                     }
                     // Si c'est un étudiant (role_id = 3), créer l'entrée dans students
                     elseif ($roleId == 3) {
-                        $studentIdNumber = filter_input(INPUT_POST, 'student_id_number', FILTER_SANITIZE_STRING) ?: 'STU' . str_pad($userId, 6, '0', STR_PAD_LEFT);
+                        $studentIdNumber = filter_input(INPUT_POST, 'student_id_number', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: 'STU' . str_pad($userId, 6, '0', STR_PAD_LEFT);
                         $classId = filter_input(INPUT_POST, 'class_id', FILTER_VALIDATE_INT) ?: null;
-                        $dateOfBirth = filter_input(INPUT_POST, 'date_of_birth', FILTER_SANITIZE_STRING) ?: '2000-01-01';
-                        $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
-                        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+                        $dateOfBirth = filter_input(INPUT_POST, 'date_of_birth', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: '2000-01-01';
+                        $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                         $this->studentModel->createStudentFromUser($userId, $studentIdNumber, $classId, $dateOfBirth, $address, $phone);
                     }
                     $this->setAlert('success', 'Utilisateur ajouté avec succès.');
@@ -130,8 +130,8 @@ class AdminController extends BaseController
             }
 
             $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $roleId = filter_input(INPUT_POST, 'role_id', FILTER_VALIDATE_INT);
             $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
@@ -248,7 +248,7 @@ class AdminController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateCsrf();
 
-            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             if (empty($name)) {
                 $this->setAlert('danger', 'Le nom de la classe est obligatoire.');
@@ -274,7 +274,7 @@ class AdminController extends BaseController
             $this->validateCsrf();
 
             $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             if (empty($id) || empty($name)) {
                 $this->setAlert('danger', 'Tous les champs sont obligatoires.');
@@ -341,7 +341,7 @@ class AdminController extends BaseController
                 $this->redirect('admin/subjects');
             }
 
-            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $coefficient = filter_input(INPUT_POST, 'coefficient', FILTER_VALIDATE_FLOAT) ?: 1.00;
 
             if (empty($name)) {
@@ -371,7 +371,7 @@ class AdminController extends BaseController
             }
 
             $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $coefficient = filter_input(INPUT_POST, 'coefficient', FILTER_VALIDATE_FLOAT) ?: 1.00;
 
             if (empty($id) || empty($name)) {
@@ -440,12 +440,12 @@ class AdminController extends BaseController
                 $this->redirect('admin/teachers');
             }
 
-            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
-            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
-            $hireDate = filter_input(INPUT_POST, 'hire_date', FILTER_SANITIZE_STRING);
+            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $hireDate = filter_input(INPUT_POST, 'hire_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($hireDate)) {
                 $this->setAlert('danger', 'Tous les champs obligatoires sont requis.');
@@ -479,11 +479,11 @@ class AdminController extends BaseController
 
             $teacherId = filter_input(INPUT_POST, 'teacher_id', FILTER_VALIDATE_INT);
             $userId = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
-            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
-            $hireDate = filter_input(INPUT_POST, 'hire_date', FILTER_SANITIZE_STRING);
+            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $hireDate = filter_input(INPUT_POST, 'hire_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
 
             if (empty($teacherId) || empty($userId) || empty($firstName) || empty($lastName) || empty($email) || empty($hireDate)) {
@@ -558,15 +558,15 @@ class AdminController extends BaseController
                 $this->redirect('admin/students');
             }
 
-            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
-            $studentIdNumber = filter_input(INPUT_POST, 'student_id_number', FILTER_SANITIZE_STRING);
+            $studentIdNumber = filter_input(INPUT_POST, 'student_id_number', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $classId = filter_input(INPUT_POST, 'class_id', FILTER_VALIDATE_INT) ?: null;
-            $dateOfBirth = filter_input(INPUT_POST, 'date_of_birth', FILTER_SANITIZE_STRING);
-            $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
-            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+            $dateOfBirth = filter_input(INPUT_POST, 'date_of_birth', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($studentIdNumber) || empty($dateOfBirth)) {
                 $this->setAlert('danger', 'Tous les champs obligatoires sont requis.');
@@ -602,14 +602,14 @@ class AdminController extends BaseController
 
             $studentId = filter_input(INPUT_POST, 'student_id', FILTER_VALIDATE_INT);
             $userId = filter_input(INPUT_POST, 'user_id', FILTER_VALIDATE_INT);
-            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+            $firstName = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $lastName = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-            $studentIdNumber = filter_input(INPUT_POST, 'student_id_number', FILTER_SANITIZE_STRING);
+            $studentIdNumber = filter_input(INPUT_POST, 'student_id_number', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $classId = filter_input(INPUT_POST, 'class_id', FILTER_VALIDATE_INT) ?: null;
-            $dateOfBirth = filter_input(INPUT_POST, 'date_of_birth', FILTER_SANITIZE_STRING);
-            $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
-            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+            $dateOfBirth = filter_input(INPUT_POST, 'date_of_birth', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
 
             if (empty($studentId) || empty($userId) || empty($firstName) || empty($lastName) || empty($email) || empty($studentIdNumber) || empty($dateOfBirth)) {
