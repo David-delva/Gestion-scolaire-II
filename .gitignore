@@ -1,0 +1,12 @@
+# Environment variables
+.env
+
+# Log files
+app.log
+
+# Test files
+test_*.php
+
+# Vendor directories
+/vendor/
+/node_modules/

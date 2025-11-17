@@ -26,7 +26,7 @@ class Database
         // Inclure les paramètres de la base de données
         require_once CONFIG_PATH . '/database.php';
 
-        $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET;
+        $dsn = 'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET;
         try {
             $this->pdo = new PDO($dsn, DB_USER, DB_PASS, DB_OPTIONS);
             // Enregistrer la connexion réussie
